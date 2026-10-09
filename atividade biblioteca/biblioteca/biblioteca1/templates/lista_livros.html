@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Livros</title>
+</head>
+<body>
+    <h1>Biblioteca - Meus livros</h1>
+
+    <ul>
+        {% for book in books %}
+            <li>
+                <strong>{{ book.title }}</strong> - 
+                <a href="{% url 'author_detail' book.author.id %}">
+                    {{ book.author }}
+                </a>
+                ({{ book.year }})
+                {% if book.available %}
+                    <span style="color: green;">[Disponível]</span>
+                {% else %}
+                    <span style="color: red;">[Indisponível]</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>Nenhum Livro cadastrado.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
